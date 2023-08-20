@@ -19,8 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'head_of_family_id',
     ];
 
     /**
@@ -41,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function family_members()
+    {
+    return $this->hasMany(User::class,'head_of_family_id');
+    }
+
+    public function head_of_family()
+    {
+    return $this->belongsTo(User::class);
+    }
 }
